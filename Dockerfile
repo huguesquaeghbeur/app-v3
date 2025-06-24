@@ -1,15 +1,14 @@
 FROM node:24-alpine AS build
 
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 USER appuser
 
 WORKDIR /app
 
+RUN mkdir -p /app && chown -R appuser:appgroup /app
 
 COPY . . 
 
-RUN chmod -R 775 /app
 
 RUN npm i
 
