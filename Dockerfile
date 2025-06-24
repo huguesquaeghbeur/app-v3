@@ -1,4 +1,4 @@
-FROM node:24-alpine AS build
+FROM mcp/node-code-sandbox AS build
 
 # RUN addgroup -g 1000 appgroup && \
 #     adduser -u 1000 -G appgroup -D appuser
@@ -17,7 +17,7 @@ RUN npm i
 
 RUN npm run build
 
-FROM nginx:alpine
+FROM nginxinc/nginx-unprivileged
 
 COPY --from=build /app/dist /usr/share/nginx/html
 
