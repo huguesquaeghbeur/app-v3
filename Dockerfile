@@ -1,18 +1,18 @@
 FROM node:24-alpine AS build
 
 
-USER appuser
 
 WORKDIR /app
 
-RUN mkdir -p /app && chown -R appuser:appgroup /app
 
 COPY . . 
 
 
 RUN npm i
 
+USER appuser
 
+RUN mkdir -p /app && chown -R appuser:appgroup /app
 COPY --chown=appuser:appgroup . .
 
 RUN npm run build
