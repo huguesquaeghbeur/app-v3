@@ -10,9 +10,12 @@ COPY . .
 
 RUN npm i
 
+
+RUN addgroup -g 1000 appgroup && \
+    adduser -u 1000 -G appgroup -D appuser
+
 USER appuser
 
-RUN mkdir -p /app && chown -R appuser:appgroup /app
 COPY --chown=appuser:appgroup . .
 
 RUN npm run build
