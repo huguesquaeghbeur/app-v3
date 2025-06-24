@@ -11,8 +11,8 @@ COPY . .
 RUN npm i
 
 
-RUN addgroup -g 1000 appgroup && \
-    adduser -u 1000 -G appgroup -D appuser
+RUN addgroup -g 1001 appgroup && \
+    adduser -u 1001 -G appgroup -D appuser
 
 USER appuser
 
