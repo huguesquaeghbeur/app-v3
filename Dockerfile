@@ -9,6 +9,8 @@ WORKDIR /app
 
 COPY . . 
 
+RUN chmod -R 775 /app
+
 RUN npm i
 
 
