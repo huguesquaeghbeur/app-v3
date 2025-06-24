@@ -1,5 +1,9 @@
 FROM node:24-alpine AS build
 
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+USER appuser
+
 WORKDIR /app
 
 COPY package.json ./
@@ -7,6 +11,8 @@ COPY package.json ./
 RUN npm i
 
 COPY . . 
+
+COPY --chown=appuser:appgroup . .
 
 RUN npm run build
 
