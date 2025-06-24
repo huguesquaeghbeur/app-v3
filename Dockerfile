@@ -1,9 +1,13 @@
 FROM node:24-alpine AS build
 
+RUN addgroup -g 1000 appgroup && \
+    adduser -u 1000 -G appgroup -D appuser
 
+USER appuser
 
 WORKDIR /app
 
+COPY --chown=appuser:appgroup . .
 
 COPY . . 
 
@@ -11,11 +15,9 @@ COPY . .
 RUN npm i
 
 
-RUN adduser -u 1001:1001 appuser
 
-USER appuser
 
-COPY --chown=appuser:appgroup . .
+
 
 RUN npm run build
 
